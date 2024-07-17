@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 
+
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,4 +22,4 @@
 </head>
 
 <body id="page-top">
-<?php require_once 'menu.php'; ?>
+    <?php require_once 'menu.php'; ?>

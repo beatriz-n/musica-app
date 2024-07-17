@@ -57,8 +57,8 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgotpassword.php">Esqueceu sua senha?</a>
-                                <br>
+                                <!-- <a class="small" href="forgotpassword.php">Esqueceu sua senha?</a>
+                                <br> -->
                                 <a class="small" href="register.php">Não tem uma conta? Crie!</a>
                             </div>
                         </div>
