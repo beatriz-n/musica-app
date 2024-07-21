@@ -20,7 +20,7 @@
                         <tr>
                             <th style="text-align: center;">Data do Cadastro</th>
                             <th>Título</th>
-                            <th style="text-align: center;">Quantidade de Níveis Cadastrados</th>
+                            <th style="text-align: center;">Quantidade de Níveis Cadastrados</th> <!-- isso aqui é so um contador para contar as atividades -->
                             <th style="text-align: center;">Status</th>
                             <th style="text-align: center;">Opções</th>
                         </tr>
@@ -32,7 +32,7 @@
                             <td style="text-align: center;">3</td>
                             <td style="text-align: center;"><span class="badge badge-success">Ativo</span></td>
                             <td style="text-align: center;">
-                                <a title="Adicionar Atividade" onclick="redirecionarAtividade(1)" class="btn btn-warning btn-sm">
+                                <a title="Adicionar Atividade" class="btn btn-warning btn-sm" onclick="abreModalAtividade(1)">
                                     <i class="fas fa-graduation-cap"></i>
                                 </a>
                                 <a title="Editar Módulo" href="moduloeditar.php" class="btn btn-primary btn-sm">
@@ -49,10 +49,17 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="atividadeListar" tabindex="-1" role="dialog" aria-labelledby="atividadeListarLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="atividadeNovoListar" tabindex="-1" role="dialog" aria-labelledby="atividadeNovoListarLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="atividadeEditarListar" tabindex="-1" role="dialog" aria-labelledby="atividadeEditarListarLabel" aria-hidden="true">
+</div>
 <!-- Fim Pagina Módulos -->
 <?php include 'footer.php'; ?>
-<script src="Atividade/Atividade.js"></script>
 
-<form action="atividade.php" method="post" id="idFormAtividade">
-    <input type="hidden" value="1" name="idModulo" id="idModulo01"/>
-</form>
+<script src="Modulo/Modulo.js"></script>
+

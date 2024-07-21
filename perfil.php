@@ -22,7 +22,6 @@
                      <p><strong>Email:</strong> douglas@gmail.com</p>
                      <p><strong>Data Nascimento:</strong> 05/01/1999</p>
                      <p><strong>Telefone:</strong> (11) 99999-9999</p>
-                     <p><strong>Instagram</strong> @dmcgee</p>
                  </div>
              </div>
          </div>

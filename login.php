@@ -33,18 +33,18 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Crie sua conta!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Bem-vindo!</h1>
                             </div>
                             <form class="user needs-validation" novalidate>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="emailPessoa" name="emailPessoa" placeholder="Email" required>
+                                    <input type="email" class="form-control form-control-user" id="emailUsuario" name="emailUsuario" placeholder="Email" required>
                                     <div class="invalid-feedback">
                                         Por favor, seu endereço de email.
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="senhaPessoa" name="senhaPessoa" placeholder="Senha" required>
+                                        <input type="password" class="form-control form-control-user" id="senhaUsario" name="senhaUsario" placeholder="Senha" required>
                                         <div class="invalid-feedback">
                                             Por favor, insira sua senha.
                                         </div>

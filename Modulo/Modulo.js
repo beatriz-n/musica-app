@@ -27,3 +27,47 @@ function adicionarAlternativa() {
     $('#alternativas').append(novaAlternativa);
     proximaLetra = String.fromCharCode(proximaLetra.charCodeAt(0) + 1); // Incrementa a letra
 }
+// atividade
+function abreModalAtividade(idModulo) {
+    $.ajax({
+        type: 'POST',
+        url: 'Modulo/ModuloM001.php',
+        async: true,
+        data: {
+            idModulo: idModulo
+        }, success: function (data) {
+            $('#atividadeListar').html(data);
+            $('#atividadeListar').modal('show');
+        }
+    });
+}
+
+function abreModalAtividadeNovo(idModulo) {
+    $.ajax({
+        type: 'POST',
+        url: 'Modulo/ModuloM002.php',
+        async: true,
+        data: {
+            idModulo: idModulo
+        }, success: function (data) {
+            $('#atividadeListar').modal('hide');
+            $('#atividadeNovoListar').html(data);
+            $('#atividadeNovoListar').modal('show');
+        }
+    });
+}
+
+function abreModalAtividadeEditar(idModulo) {
+    $.ajax({
+        type: 'POST',
+        url: 'Modulo/ModuloM003.php',
+        async: true,
+        data: {
+            idModulo: idModulo
+        }, success: function (data) {
+            $('#atividadeListar').modal('hide');
+            $('#atividadeEditarListar').html(data);
+            $('#atividadeEditarListar').modal('show');
+        }
+    });
+}
