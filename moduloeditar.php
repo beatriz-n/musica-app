@@ -28,7 +28,49 @@
                     <label for="descricao">Descrição</label>
                     <textarea class="form-control" id="descricao" name="descricaoModulo" rows="3" placeholder="Digite a descrição do módulo"><?php echo $modulo['descricao']; ?></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+
+
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+             <h1 class="h4 mb-2 text-gray-800">Gerenciar Atividades</h1>
+                        <thead>
+                            <tr>
+
+                                <th>Título</th>
+                                <th style="text-align: center;">Status</th>
+                                <th style="text-align: center;">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Notas Músicais</td>
+                                <td style="text-align: center;"><span class="badge badge-success">Ativo</span></td>
+                                <td style="text-align: center;">
+                                    <a title="Excluir Atividade" href="#" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Notas Músicais 2</td>
+                                <td style="text-align: center;"><span class="badge badge-success">Ativo</span></td>
+                                <td style="text-align: center;">
+                                    <a title="Excluir Atividade" href="#" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Notas Músicais 3</td>
+                                <td style="text-align: center;"><span class="badge badge-danger">Inativo</span></td>
+                                <td style="text-align: center;">
+                                    <a title="Excluir Atividade" href="#" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>
     </div>
