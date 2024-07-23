@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="card-body">
-            <form id="formModulo" novalidate>
+            <form id="formModuloInserir" method="post" action="./Modulo/ModuloI001.php" novalidate>
                 <div class="form-group">
                     <label for="titulo">Título</label>
                     <input type="text" class="form-control" id="tituloModulo" name="tituloModulo" placeholder="Digite o título do módulo" required>
@@ -30,18 +30,25 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descricao">Descrição</label>
-                    <textarea class="form-control" id="descricao" name="descricaoModulo" rows="3" placeholder="Digite a descrição do módulo" required></textarea>
+                    <label for="descricaoModulo">Descrição</label>
+                    <textarea class="form-control" id="descricaoModulo" name="descricaoModulo" rows="3" placeholder="Digite a descrição do módulo" required></textarea>
                     <div class="invalid-feedback">
                         Por favor, insira a descrição do módulo.
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button id="buttonFormModuloInserir" type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>
     </div>
 </div>
 <!-- Fim Pagina Módulos Novo -->
+<script src="Modulo/Modulo.js"></script>
+
+<script>
+    $(document).ready(function() {
+        ajaxInserirModulo();
+    });
+</script>
 
 <script>
     // Exemplo de JavaScript para desabilitar o envio do formulário se houver campos inválidos

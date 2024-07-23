@@ -71,3 +71,33 @@ function abreModalAtividadeEditar(idModulo) {
         }
     });
 }
+
+function ajaxInserirModulo() {
+    $('#formModuloInserir').ajaxForm({
+        beforeSend: function () {
+            $('#buttonFormModuloInserir').prop('disabled', true);
+        },
+        success: function (data) {
+            $('#buttonFormModuloInserir').prop('disabled', false);
+            try {
+                if (data != '0') {
+                    swal({
+                        title: 'Bom trabalho!',
+                        text: 'Módulo inserido com sucesso.',
+                        type: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Ok!',
+                        closeOnConfirm: true
+                    }, function (isConfirm) {
+                        location.href = 'modulo.php';
+                    });
+                } else {
+                    swal('Erro!', 'Houve um erro ao tentar inserir o Módulo!', 'error');
+                }
+            } catch (error) {
+                swal('Erro!', 'Erro inesperado!', 'error');
+            }
+        }
+    });
+}
