@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $dbname = "musicapp";
 
 function conexaoDB($servername, $username, $password, $dbname)

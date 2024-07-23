@@ -9,7 +9,7 @@
                  </div>
                  <div class="d-flex col-3 justify-content-end">
                      <a href="dashboard.php" class="btn btn-primary">Voltar</a>
-                     <a href="perfileditar.php" class="btn btn-primary">Editar Perfil</a>
+                     <a href="perfilusuarioeditar.php" class="btn btn-primary">Editar Perfil</a>
                  </div>
              </div>
          </div>

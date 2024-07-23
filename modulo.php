@@ -38,7 +38,7 @@
                                 <a title="Editar Módulo" href="moduloeditar.php" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a title="Excluir Módulo" href="#" class="btn btn-danger btn-sm">
+                                <a title="Excluir Módulo" onclick="excluirModulo(<?= $idModulo ?>)" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -62,4 +62,3 @@
 <?php include 'footer.php'; ?>
 
 <script src="Modulo/Modulo.js"></script>
-

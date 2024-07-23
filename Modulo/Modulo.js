@@ -101,3 +101,37 @@ function ajaxInserirModulo() {
         }
     });
 }
+
+
+function excluirModulo(idModulo) {
+    swal({
+        title: 'Atenção',
+        text: 'Deseja excluir o módulo?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'green',
+        confirmButtonText: 'Sim!',
+        cancelButtonText: 'Cancelar!',
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                type: 'POST',
+                url: 'Modulo/ModuloE001.php',
+                async: true,
+                data: {
+                    idModulo: idModulo
+                }, success: function (data) {
+                    if (data == 1) {
+                        swal('Sucesso!', 'Módulo Excluído!', 'success');
+                    } else {
+                        swal('Erro!', 'Houve um erro ao tentar excluir o Módulo!', 'error');
+                    }
+                }
+            });
+        } else {
+
+        }
+
+    });
+}
