@@ -30,6 +30,10 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="nivel">Nível</label>
+                    <input type="number" min="0" class="form-control" id="nivelModulo" name="nivelModulo" placeholder="Digite o título do módulo">
+                </div>
+                <div class="form-group">
                     <label for="descricaoModulo">Descrição</label>
                     <textarea class="form-control" id="descricaoModulo" name="descricaoModulo" rows="3" placeholder="Digite a descrição do módulo" required></textarea>
                     <div class="invalid-feedback">

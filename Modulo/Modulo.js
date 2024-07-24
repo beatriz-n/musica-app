@@ -9,6 +9,11 @@ function redirecionarAtividadeNovo(idModulo) {
     $('#idFormAtividadeNovo').trigger('submit');
 }
 
+function editarModulo(idModulo) {
+    $('#idModulo03').val(idModulo);
+    $('#idFormEditarModulo').trigger('submit');
+}
+
 // adiciona mais alternativas
 var proximaLetra = 'E'; // Começa com a letra E para a próxima alternativa
 
@@ -102,6 +107,35 @@ function ajaxInserirModulo() {
     });
 }
 
+function ajaxAlterarModulo() {
+    $('#formModuloAlterar').ajaxForm({
+        beforeSend: function () {
+            $('#buttonFormModuloAlterar').prop('disabled', true);
+        },
+        success: function (data) {
+            $('#buttonFormModuloAlterar').prop('disabled', false);
+            try {
+                if (data != '0') {
+                    swal({
+                        title: 'Bom trabalho!',
+                        text: 'Módulo alterado com sucesso.',
+                        type: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Ok!',
+                        closeOnConfirm: true
+                    }, function (isConfirm) {
+                        location.href = 'modulo.php';
+                    });
+                } else {
+                    swal('Erro!', 'Houve um erro ao tentar alterar o Módulo!', 'error');
+                }
+            } catch (error) {
+                swal('Erro!', 'Erro inesperado!', 'error');
+            }
+        }
+    });
+}
 
 function excluirModulo(idModulo) {
     swal({
@@ -123,9 +157,45 @@ function excluirModulo(idModulo) {
                     idModulo: idModulo
                 }, success: function (data) {
                     if (data == 1) {
+                        location.href = "modulo.php";
                         swal('Sucesso!', 'Módulo Excluído!', 'success');
                     } else {
                         swal('Erro!', 'Houve um erro ao tentar excluir o Módulo!', 'error');
+                    }
+                }
+            });
+        } else {
+
+        }
+
+    });
+}
+
+function excluirAtividadeModulo(idAtividade, idModulo) {
+    swal({
+        title: 'Atenção',
+        text: 'Deseja excluir a atividade do módulo atual?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'green',
+        confirmButtonText: 'Sim!',
+        cancelButtonText: 'Cancelar!',
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                type: 'POST',
+                url: 'Modulo/ModuloE002.php',
+                async: true,
+                data: {
+                    idAtividade: idAtividade,
+                    idModulo: idModulo
+                }, success: function (data) {
+                    if (data == 1) {
+                        editarModulo(idModulo);
+                        swal('Sucesso!', 'Atividade Excluída!', 'success');
+                    } else {
+                        swal('Erro!', 'Houve um erro ao tentar excluir a Atividade!', 'error');
                     }
                 }
             });

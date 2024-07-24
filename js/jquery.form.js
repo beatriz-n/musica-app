@@ -1538,6 +1538,3 @@
 		}
 	}
 }));
-
-
-console.log("TESTE");

@@ -6,7 +6,7 @@ $query = "UPDATE Modulo SET
         tituloModulo = '$tituloModulo',
         descricaoModulo = '$descricaoModulo',
         statusModulo = '$statusModulo',
-        nivelModulo = '$nivelModulo',
+        nivelModulo = '$nivelModulo'
         WHERE idModulo = $idModulo";
 
 $result = mysqli_query($con, $query);
