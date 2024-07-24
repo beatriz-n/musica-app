@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/07/2024 às 20:44
+-- Tempo de geração: 24/07/2024 às 03:45
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `atividade` (
   `idAtividade` int(11) NOT NULL,
   `perguntaAtividade` text DEFAULT NULL,
   `alternativaAtividade` text DEFAULT NULL,
+  `statusAtividade` int(11) DEFAULT NULL,
   `idModulo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,9 +39,9 @@ CREATE TABLE `atividade` (
 -- Despejando dados para a tabela `atividade`
 --
 
-INSERT INTO `atividade` (`idAtividade`, `perguntaAtividade`, `alternativaAtividade`, `idModulo`) VALUES
-(1, 'Qual o terceiro grau da escala maior de dó?', '[[\'D\',\'0\'],[\'F#\',\'0\'],[\'E\',\'1\']]', 4),
-(2, 'Qual o quinto grau da escala maior de dó?', '[[\'B\',\'0\'],[\'G\',\'1\'],[\'A#\',\'0\']]', 4);
+INSERT INTO `atividade` (`idAtividade`, `perguntaAtividade`, `alternativaAtividade`, `statusAtividade`, `idModulo`) VALUES
+(1, 'Qual o terceiro grau da escala maior de dó?', '[[\'D\',\'0\'],[\'F#\',\'0\'],[\'E\',\'1\']]', 1, 4),
+(2, 'Qual o quinto grau da escala maior de dó?', '[[\'B\',\'0\'],[\'G\',\'1\'],[\'A#\',\'0\']]', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ CREATE TABLE `modulo` (
 
 INSERT INTO `modulo` (`idModulo`, `tituloModulo`, `descricaoModulo`, `statusModulo`, `nivelModulo`) VALUES
 (1, 'Notas Músicais', 'Aprenda notas musicais', 1, 1),
-(2, 'Ritmos', 'Os ritmos são...', 1, 2),
+(2, 'Ritmos', 'Os ritmos são...', 0, 2),
 (3, 'Acordes', 'Acordes são junção de...', 1, 4),
 (4, 'Escalas', 'Aprenda escalas de forma divertida', 1, 3);
 
@@ -163,13 +164,13 @@ ALTER TABLE `pessoamodulo`
 -- AUTO_INCREMENT de tabela `atividade`
 --
 ALTER TABLE `atividade`
-  MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `pessoa`
