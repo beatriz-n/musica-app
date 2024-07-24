@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/07/2024 às 03:45
+-- Tempo de geração: 24/07/2024 às 03:52
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -104,19 +104,6 @@ CREATE TABLE `pessoaatividade` (
   `idPessoa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `pessoamodulo`
---
-
-CREATE TABLE `pessoamodulo` (
-  `idPessoaModulo` int(11) NOT NULL,
-  `completoPessoaModulo` int(11) DEFAULT NULL COMMENT '1:Completo; 0:Incompleto',
-  `idPessoa` int(11) DEFAULT NULL,
-  `idModulo` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Índices para tabelas despejadas
 --
@@ -149,14 +136,6 @@ ALTER TABLE `pessoaatividade`
   ADD KEY `fk_PessoaAtividade_Pessoa` (`idPessoa`);
 
 --
--- Índices de tabela `pessoamodulo`
---
-ALTER TABLE `pessoamodulo`
-  ADD PRIMARY KEY (`idPessoaModulo`),
-  ADD KEY `fk_PessoaModulo_Pessoa` (`idPessoa`),
-  ADD KEY `fk_PessoaModulo_Modulo` (`idModulo`);
-
---
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -185,12 +164,6 @@ ALTER TABLE `pessoaatividade`
   MODIFY `idPessoaAtividade` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `pessoamodulo`
---
-ALTER TABLE `pessoamodulo`
-  MODIFY `idPessoaModulo` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Restrições para tabelas despejadas
 --
 
@@ -199,13 +172,6 @@ ALTER TABLE `pessoamodulo`
 --
 ALTER TABLE `atividade`
   ADD CONSTRAINT `fk_Atividade_Modulo` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Restrições para tabelas `pessoamodulo`
---
-ALTER TABLE `pessoamodulo`
-  ADD CONSTRAINT `fk_PessoaModulo_Modulo` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PessoaModulo_Pessoa` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`idPessoa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
