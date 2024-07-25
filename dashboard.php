@@ -2,7 +2,7 @@
 require_once './core/conexaoDB.php';
 require_once 'headeraprendizagem.php';
 
-$cmd = "SELECT * FROM modulo";
+$cmd = "SELECT * FROM modulo WHERE statusModulo = 1";
 $result = mysqli_query($con, $cmd);
 $qtdRegistros = mysqli_num_rows($result);
 $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -10,17 +10,12 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $arrayNivel = [];
 $nivelMenor = 999;
 $qtdCompletos = 0;
+$completoModulo = 0;
 
 for ($i = 0; $i < $qtdRegistros; $i++) {
     $dados = $array[$i];
     $idModulo = $dados['idModulo'];
     $nivelModulo = $dados['nivelModulo'];
-    $completoModulo = $dados['completoModulo'];
-    // acha o nivel menor incompleto
-    if (($nivelModulo < $nivelMenor) && $completoModulo == 0) {
-        $nivelMenor = $nivelModulo;
-        $idModuloAtual = $idModulo;
-    }
 
     // criando array nivel
     $arrayNivel[] = [
@@ -28,7 +23,6 @@ for ($i = 0; $i < $qtdRegistros; $i++) {
         'nivel' => $nivelModulo
     ];
 }
-echo $nivelMenor;
 
 // ordena o array pelo nível
 usort($arrayNivel, function ($a, $b) {
@@ -38,34 +32,53 @@ usort($arrayNivel, function ($a, $b) {
 
 <div class="container-fluid d-flex flex-column align-items-center justify-content-center overflow" style="padding: 200px;">
     <?php
+
     for ($j = 0; $j < count($arrayNivel); $j++) {
         $idModuloOrdenado = $arrayNivel[$j]['id'];
         $nivelModuloOrdenado = $arrayNivel[$j]['nivel'];
-
-        $cmd2 = "SELECT * FROM modulo WHERE idModulo = $idModuloOrdenado";
+        $cmd2 = "SELECT * FROM modulo
+        WHERE idModulo = $idModuloOrdenado";
         $result2 = mysqli_query($con, $cmd2);
         $array2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
         // titulo do modulo ordenado
         $tituloModuloOrdenado = $array2[0]['tituloModulo'];
-        // completo modulo
-        $completoModuloOrdenado = $array2[0]['completoModulo'];
 
-        // contador de niveis completos para calculo de progresso
-        if ($completoModuloOrdenado == 1) {
+        // quantidade de atividades em cada modulo no total
+        $cmd3 = "SELECT * FROM atividade
+        WHERE idModulo = $idModuloOrdenado";
+        $result3 = mysqli_query($con, $cmd3);
+        $qtdRegistro3 = mysqli_num_rows($result3);
+        $array3 = mysqli_fetch_all($result3, MYSQLI_ASSOC);
+
+        // quantidade de atividades com resposta pelo usuario
+        $cmd4 = "SELECT * FROM pessoaatividade pa
+        LEFT JOIN atividade a ON pa.idAtividade = a.idAtividade
+        WHERE idModulo = $idModuloOrdenado AND idPessoa = 1";
+        $result4 = mysqli_query($con, $cmd4);
+        $qtdRegistro4 = mysqli_num_rows($result4);
+        $array4 = mysqli_fetch_all($result4, MYSQLI_ASSOC);
+        if (($qtdRegistro4 == $qtdRegistro3) && ($qtdRegistro4 != 0)) {
+            $completoModulo = 1;
             $qtdCompletos++;
+        } else {
+            $completoModulo = 0;
+        }
+        // acha nivel menor
+        if (($nivelModuloOrdenado < $nivelMenor) && $completoModulo == 0) {
+            $nivelMenor = $nivelModuloOrdenado;
         }
 
         // idmodulo atual é o id do modulo com o nivel menor e incompleto
-        if ($nivelModuloOrdenado == $nivelMenor) {
+        if ($completoModulo == 1) {
+            $status = "card-focus-completa";
+        } else if ($nivelModuloOrdenado == $nivelMenor) {
             $status = "card-focus-atual";
         } else if ($nivelModuloOrdenado > $nivelMenor) {
             $status = "card-focus-incompleta";
-        } else if ($completoModuloOrdenado == 1) {
-            $status = "card-focus-completa";
         }
 
     ?>
-        <div class="card w-50 mb-3 <?= $status ?>" onclick="focusCard(this)">
+        <div class="card w-50 mb-3 <?= $status ?>" onclick="redirecionarFazerAtividade(<?= $idModuloOrdenado?>);">
             <div class="card-body text-center">
                 Nível <?= $nivelModuloOrdenado ?> - <?= $tituloModuloOrdenado ?>
             </div>
@@ -80,7 +93,7 @@ usort($arrayNivel, function ($a, $b) {
         <div class="xp-bar-label">Barra de Progresso</div>
         <div class="xp-bar-container">
             <div class="xp-bar">
-                <div class="xp-bar-fill" style="width: <?=$progresso?>%;"></div> <!-- style width define o quanto a barra vai estar preenchida -->
+                <div class="xp-bar-fill" style="width: <?= $progresso ?>%;"></div> <!-- style width define o quanto a barra vai estar preenchida -->
             </div>
         </div>
     </div>
@@ -90,8 +103,8 @@ usort($arrayNivel, function ($a, $b) {
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Scroll the card with the class 'card-focus-incompleta' into view
-        const focusedCard = document.querySelector('.card-focus-incompleta');
+        // rola a tela para o card atual
+        const focusedCard = document.querySelector('.card-focus-atual');
         if (focusedCard) {
             focusedCard.scrollIntoView({
                 behavior: 'smooth',
@@ -100,3 +113,9 @@ usort($arrayNivel, function ($a, $b) {
         }
     });
 </script>
+
+<form id="idFormFazerAtividade" action="fazeratividade.php" method="post">
+    <input id="idModulo01" name="idModulo" type="hidden">
+</form>
+
+<script src="Atividade/Atividade.js"></script>
