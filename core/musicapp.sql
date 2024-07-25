@@ -88,7 +88,7 @@ CREATE TABLE `pessoa` (
 -- Despejando dados para a tabela `pessoa`
 --
 
-INSERT INTO `pessoa` (`idPessoa`, `nomePessoa`, `emailPessoa`, `nascimentoPessoa`, `telefonePessoa`, `instagramPessoa`, `imagemPessoa`) VALUES
+INSERT INTO `pessoa` (`idPessoa`, `nomePessoa`, `emailPessoa`, `senhaPessoa`, `nascimentoPessoa`, `telefonePessoa`, `instagramPessoa`, `imagemPessoa`) VALUES
 (1, 'Bruno', 'bruno@gmail.com', '123456', '2004-03-22', '(17)99999-8888', 'brunohsz', NULL);
 
 -- --------------------------------------------------------
