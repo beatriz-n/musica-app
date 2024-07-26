@@ -15,7 +15,7 @@ if (empty($idPessoaSession)) {
     } else {
         if ($_SERVER['PHP_SELF'] != 'index.php' && $_SERVER['PHP_SELF'] != '/musica-app/index.php') {            
             echo $_COOKIE['idPessoaCookie'];
-            // header('Location: ./login.php');
+            header('Location: ./login.php');
         }
     }
 }
