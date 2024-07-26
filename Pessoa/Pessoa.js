@@ -3,7 +3,6 @@ function editarPessoa(idPessoa) {
     $('#idFormEditarPessoa').trigger('submit');
 }
 
-
 function ajaxAlterarPessoa() {
     $('#formPessoaAlterar').ajaxForm({
         beforeSend: function () {
