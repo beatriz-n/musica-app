@@ -32,7 +32,7 @@
             <div class="modal-body">Tem certeza que deseja sair?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                <a class="btn btn-primary" href="login.php">Sim</a>
+                <a class="btn btn-primary" onclick="sair()">Sim</a>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="modal-body">Quando marcado o Usuário ganha permissões que permitem excluir e editar Usuários, Atividades e Módulos</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary"  type="button" data-dismiss="modal">Não</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
                 <a class="btn btn-primary" onclick="darPermissaoAdm(1)">Sim</a>
             </div>
         </div>
@@ -80,6 +80,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="js/jquery.form.js"></script>
+
+<script src="Pessoa/Pessoa.js"></script>
 
 </body>
 

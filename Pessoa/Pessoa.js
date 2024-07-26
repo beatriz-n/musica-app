@@ -3,7 +3,6 @@ function editarPessoa(idPessoa) {
     $('#idFormEditarPessoa').trigger('submit');
 }
 
-
 function ajaxAlterarPessoa() {
     $('#formPessoaAlterar').ajaxForm({
         beforeSend: function () {
@@ -42,10 +41,10 @@ function ajaxInserirPessoa() {
         success: function (data) {
             $('#buttonFormPessoaInserir').prop('disabled', false);
             try {
-                if (data != '0') {
+                if (data > '0') {
                     swal({
                         title: 'Bom trabalho!',
-                        text: 'Cadastro realizado com sucesso',
+                        text: 'Cadastro realizado com sucesso!',
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#DD6B55',
@@ -54,12 +53,27 @@ function ajaxInserirPessoa() {
                     }, function (isConfirm) {
                         location.href = 'perfilusuario.php';
                     });
-                } else {
-                    swal('Erro!', 'Houve um erro ao tentar cadastrar', 'error');
+                } else if (data == '-1') {
+                    swal('Erro!', 'O e-mail já está cadastrado!', 'error');
+                }
+                else {
+                    swal('Erro!', 'Houve um erro ao tentar cadastrar!', 'error');
                 }
             } catch (error) {
                 swal('Erro!', 'Erro inesperado!', 'error');
             }
+        }
+    });
+}
+
+function sair() {
+    $.ajax({
+        type: 'POST',
+        url: 'Pessoa/PessoaN001.php',
+        async: true,
+        data: {            
+        }, success: function (data) {   
+            location.href = 'login.php';    
         }
     });
 }
