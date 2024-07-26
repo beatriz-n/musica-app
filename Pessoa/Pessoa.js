@@ -32,3 +32,48 @@ function ajaxAlterarPessoa() {
         }
     });
 }
+
+function ajaxInserirPessoa() {
+    $('#formPessoaInserir').ajaxForm({
+        beforeSend: function () {
+            $('#buttonFormPessoaInserir').prop('disabled', true);
+        },
+        success: function (data) {
+            $('#buttonFormPessoaInserir').prop('disabled', false);
+            try {
+                if (data > '0') {
+                    swal({
+                        title: 'Bom trabalho!',
+                        text: 'Cadastro realizado com sucesso!',
+                        type: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Ok!',
+                        closeOnConfirm: true
+                    }, function (isConfirm) {
+                        location.href = 'perfilusuario.php';
+                    });
+                } else if (data == '-1') {
+                    swal('Erro!', 'O e-mail já está cadastrado!', 'error');
+                }
+                else {
+                    swal('Erro!', 'Houve um erro ao tentar cadastrar!', 'error');
+                }
+            } catch (error) {
+                swal('Erro!', 'Erro inesperado!', 'error');
+            }
+        }
+    });
+}
+
+function sair() {
+    $.ajax({
+        type: 'POST',
+        url: 'Pessoa/PessoaN001.php',
+        async: true,
+        data: {            
+        }, success: function (data) {   
+            location.href = 'login.php';    
+        }
+    });
+}

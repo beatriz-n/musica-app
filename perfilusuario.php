@@ -1,12 +1,12 @@
  <?php
     require_once 'headeraprendizagem.php';
 
-    $query = 'SELECT * FROM pessoa WHERE 1';
+    $query = "SELECT * FROM pessoa WHERE idPessoa = $idPessoaSession";
 
     $result = mysqli_query($con, $query);
     $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $pessoa = $array[0];
-?>
+    ?>
 
  <!-- Começo Página de Perfil -->
  <div class="container-fluid">
@@ -17,8 +17,8 @@
                      <h1 class="h3 mb-0 text-gray-800">Perfil</h1>
                  </div>
                  <div class="d-flex col-3 justify-content-end">
-                     <a href="dashboard.php" class="btn btn-primary me-2">Voltar</a>
-                     <a class="btn btn-primary ms-2" onclick="editarPessoa(<?= $pessoa['idPessoa']; ?>)">Editar Perfil</a>
+                     <a href="dashboard.php" class="btn btn-primary mr-2">Voltar</a>
+                     <a class="btn btn-primary" onclick="editarPessoa(<?= $pessoa['idPessoa']; ?>)">Editar Perfil</a>
                  </div>
              </div>
          </div>
@@ -31,7 +31,7 @@
                  <div class="align-self-center col-md-6 pe-4">
                      <h1><?php echo $pessoa['nomePessoa']; ?></h1>
                      <p><strong>Email:</strong> <?php echo $pessoa['emailPessoa']; ?></p>
-                     <p><strong>Data Nascimento:</strong><?php echo date(' d/m/Y', strtotime($pessoa['nascimentoPessoa'])); ?></p>
+                     <p><strong>Data Nascimento:</strong><?php echo !empty($pessoa['nascimentoPessoa']) ? date('d/m/Y', strtotime($pessoa['nascimentoPessoa'])) : ''; ?></p>
                      <p><strong>Telefone:</strong> <?php echo $pessoa['telefonePessoa']; ?></p>
                      <p><strong>Instagram:</strong> @<?php echo $pessoa['instagramPessoa']; ?></p>
                  </div>

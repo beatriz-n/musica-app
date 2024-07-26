@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -8,14 +8,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>SB Admin 2 - Registrar</title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Fontes personalizadas para este template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Estilos personalizados para este template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +30,7 @@
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
+                <!-- Linha aninhada dentro do corpo do cartão -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
@@ -35,7 +38,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Crie sua conta!</h1>
                             </div>
-                            <form class="user needs-validation" novalidate>
+                            <form id="formPessoaInserir" method="post" action="./Pessoa/PessoaI001.php" class="user needs-validation" novalidate>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="nomePessoa" name="nomePessoa" placeholder="Nome Completo" required>
@@ -64,7 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                <button id="buttonFormPessoaInserir" type="submit" class="btn btn-primary btn-user btn-block">
                                     Criar
                                 </button>
                                 <hr>
@@ -81,48 +84,55 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 
-    <!-- JavaScript for validation -->
+    <!-- Scripts personalizados para todas as páginas -->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- JavaScript para validação -->
     <script>
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
+        $(document).ready(function() {
+            var forms = $('.needs-validation');
 
-                        if (document.getElementById('senhaPessoa').value !== document.getElementById('senhaPessoaValida').value) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            document.getElementById('senhaPessoaValida').setCustomValidity('Senhas não coincidem');
-                        } else {
-                            document.getElementById('senhaPessoaValida').setCustomValidity('');
-                        }
+            forms.each(function() {
+                var form = $(this);
 
-                        form.classList.add('was-validated');
-                    }, false);
+                form.on('submit', function(event) {
+                    if (form[0].checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    var senhaPessoa = $('#senhaPessoa').val();
+                    var senhaPessoaValida = $('#senhaPessoaValida').val();
+
+                    if (senhaPessoa !== senhaPessoaValida) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        $('#senhaPessoaValida')[0].setCustomValidity('Senhas não coincidem');
+                    } else {
+                        $('#senhaPessoaValida')[0].setCustomValidity('');
+                    }
+
+                    form.addClass('was-validated');
                 });
-            }, false);
-        })();
+            });
+        });
     </script>
 
+    <!-- Script personalizado -->
+    <script src="Pessoa/Pessoa.js"></script>
+    <script>
+        $(document).ready(function() {
+            ajaxInserirPessoa();
+        });
+    </script>
 </body>
 
 </html>
