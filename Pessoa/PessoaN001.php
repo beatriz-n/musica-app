@@ -1,7 +1,9 @@
 <?php
-session_destroy();
+if (session_status() == PHP_SESSION_ACTIVE) {
+    session_destroy();
 
-$_SESSION = array();
+    $_SESSION = array();
+}
 
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -15,4 +17,5 @@ if (ini_get("session.use_cookies")) {
         $params["httponly"]
     );
 }
-setcookie("idPessoaCookie", null, -1);
+
+setcookie("idPessoaCookie", null, -1, '/');
