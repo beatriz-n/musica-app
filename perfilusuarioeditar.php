@@ -38,7 +38,7 @@ $pessoa = $array[0];
                         </div>
                         <div class="form-group">
                             <label for="data_nascimento">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="nascimento" name="nascimentoPessoa" value="<?php echo $pessoa['nascimentoPessoa']; ?>">
+                            <input type="date" class="form-control" id="nascimentoPessoa" name="nascimentoPessoa" value="<?php echo $pessoa['nascimentoPessoa']; ?>">
                         </div>
                         <div class="form-group">
                             <label for="telefone">Telefone</label>
@@ -53,7 +53,7 @@ $pessoa = $array[0];
                         <div class="form-group">
                             <label for="imagem_perfil">Imagem de Perfil</label>
                             <input type="file" class="form-control-file" id="imagem_perfil" name="imagem_perfil">
-                            <img width="400" height="400" src="img/<?php echo $pessoa['imagemPessoa']; ?>" class="img-profile rounded-circle mt-3" alt="Imagem de Perfil">
+                            <img width="400" height="400" src="<?php echo 'Pessoa/img/perfil/' . $pessoa['imagemPessoa']; ?> " class="img-profile rounded-circle mt-3" alt="Imagem de Perfil">
                         </div>
                     </div>
                 </div>

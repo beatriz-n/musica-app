@@ -25,19 +25,18 @@
 
          <div class="card-body">
              <div class="row">
-                 <div class="col-md-6">
-                     <img width="400" height="400" src="img/Perfil/<?php echo $pessoa['imagemPessoa']; ?>" class="img-profile rounded-circle" alt="Imagem de Perfil">
+                 <div class="col-md-6 d-flex justify-content-end pr-4">
+                     <img width="400" height="400" src="<?php echo 'Pessoa/img/perfil/' . $pessoa['imagemPessoa']; ?>" class="img-profile rounded-circle" alt="Imagem de Perfil">
                  </div>
-                 <div class="align-self-center col-md-6">
+                 <div class="align-self-center col-md-6 pe-4">
                      <h1><?php echo $pessoa['nomePessoa']; ?></h1>
                      <p><strong>Email:</strong> <?php echo $pessoa['emailPessoa']; ?></p>
                      <p><strong>Data Nascimento:</strong><?php echo !empty($pessoa['nascimentoPessoa']) ? date('d/m/Y', strtotime($pessoa['nascimentoPessoa'])) : ''; ?></p>
                      <p><strong>Telefone:</strong> <?php echo $pessoa['telefonePessoa']; ?></p>
-                     <p><strong>Instagram:</strong> <?php echo $pessoa['instagramPessoa']; ?></p>
+                     <p><strong>Instagram:</strong> @<?php echo $pessoa['instagramPessoa']; ?></p>
                  </div>
              </div>
          </div>
-
      </div>
  </div>
 

@@ -1,46 +1,45 @@
 <?php
-extract($_POST);
 require_once '../core/includeCore.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_FILES['imagem_perfil']) && $_FILES['imagem_perfil']['error'] === UPLOAD_ERR_OK) {
-        $imagemTmpPath = $_FILES['imagem_perfil']['tmp_name'];
-        $imagemOriginalName = $_FILES['imagem_perfil']['name'];
-        $imagemSize = $_FILES['imagem_perfil']['size'];
-        $imagemType = $_FILES['imagem_perfil']['type'];
-        $imagemExtension = pathinfo($imagemOriginalName, PATHINFO_EXTENSION);
+date_default_timezone_set('America/Sao_Paulo');
 
-        // Verifica se a extensão é válida
-        $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        if (in_array(strtolower($imagemExtension), $validExtensions)) {
-            $imagemName = md5($imagemOriginalName . strtotime("now")) . "." . $imagemExtension;
-            $uploadPath = 'img/perfil/' . $imagemName;
 
-            // Verifica se o diretório existe e tenta criar se não existir
-            if (!file_exists('img/perfil/')) {
-                mkdir('img/perfil/', 0777, true);
-            }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagem_perfil'])) {
+    $nomePessoa = $_POST['nomePessoa'];
+    $emailPessoa = $_POST['emailPessoa'];
+    $nascimentoPessoa = $_POST['nascimentoPessoa'];
+    $telefonePessoa = $_POST['telefonePessoa'];
+    $instagramPessoa = $_POST['instagramPessoa'];
+    $idPessoa = $_POST['idPessoa'];
 
-            // Move o arquivo para o diretório desejado
-            move_uploaded_file($imagemTmpPath, $uploadPath);
-        } else {
-            echo "Extensão de arquivo inválida.";
-        }
-    } else {
-        echo "Nenhum arquivo enviado ou ocorreu um erro no envio.";
-    }
-}
+    // Gera o novo nome do arquivo com a data e hora exata
+    $imagem = $_FILES['imagem_perfil'];
+    $extensao = pathinfo($imagem['name'], PATHINFO_EXTENSION);
+    $imagemNomeNovo = date('Y_m_d_H-i-s') . '.' . $extensao;
 
-$query = "UPDATE pessoa SET  
+    // Move o arquivo para o diretório img/perfil/
+    $diretorio = 'img/perfil/';
+    $caminhoCompleto = $diretorio . $imagemNomeNovo;
+
+    $result = false;
+
+    //query do banco de dados
+    $query = "UPDATE pessoa SET
         nomePessoa = '$nomePessoa',
         emailPessoa = '$emailPessoa',
         nascimentoPessoa = '$nascimentoPessoa',
         telefonePessoa = '$telefonePessoa',
         instagramPessoa = '$instagramPessoa',
-        imagemPessoa = '$imagemName'
+        imagemPessoa = '$imagemNomeNovo'
         WHERE idPessoa = $idPessoa";
 
-$result = mysqli_query($con, $query);
+    $result = mysqli_query($con, $query);
+
+    //salva a imagem no diretório 
+    if ($result) {
+        move_uploaded_file($imagem['tmp_name'], $caminhoCompleto);
+    }
+}
 
 if ($result) {
     echo 1;
