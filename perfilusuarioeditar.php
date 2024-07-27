@@ -9,8 +9,8 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $pessoa = $array[0];
 
 ?>
-<!-- Começo Página de Perfil Editar-->
 
+<!-- Começo Página de Perfil Editar-->
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">

@@ -18,7 +18,8 @@
                  </div>
                  <div class="d-flex col-3 justify-content-end">
                      <a href="dashboard.php" class="btn btn-primary mr-2">Voltar</a>
-                     <a class="btn btn-primary" onclick="editarPessoa(<?= $pessoa['idPessoa']; ?>)">Editar Perfil</a>
+                     <a class="btn btn-primary mr-2" onclick="editarPessoa(<?= $pessoa['idPessoa']; ?>)">Editar Perfil</a>
+                     <a class="btn btn-danger" onclick="excluirPessoa(<?= $pessoa['idPessoa']; ?>)">Excluir Conta</a>
                  </div>
              </div>
          </div>
@@ -31,9 +32,9 @@
                  <div class="align-self-center col-md-6 pe-4">
                      <h1><?php echo $pessoa['nomePessoa']; ?></h1>
                      <p><strong>Email:</strong> <?php echo $pessoa['emailPessoa']; ?></p>
-                     <p><strong>Data Nascimento:</strong><?php echo !empty($pessoa['nascimentoPessoa']) ? date('d/m/Y', strtotime($pessoa['nascimentoPessoa'])) : ''; ?></p>
+                     <p><strong>Data Nascimento:</strong><?php echo !empty($pessoa['nascimentoPessoa']) ? date(' d/m/Y', strtotime($pessoa['nascimentoPessoa'])) : ''; ?></p>
                      <p><strong>Telefone:</strong> <?php echo $pessoa['telefonePessoa']; ?></p>
-                     <p><strong>Instagram:</strong> @<?php echo $pessoa['instagramPessoa']; ?></p>
+                     <p><strong>Instagram:</strong> <?php echo $pessoa['instagramPessoa']; ?></p>
                  </div>
              </div>
          </div>

@@ -1,3 +1,12 @@
+<?php
+if (isset($idPessoaSession)) {
+    $query = "SELECT nomePessoa FROM pessoa WHERE idPessoa = $idPessoaSession";
+
+    $result = mysqli_query($con, $query);
+    $nomePessoa = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['nomePessoa'];
+}
+?>
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -41,7 +50,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $mensagem = isset($nomePessoa) ? $nomePessoa : ""?></span>
                             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                         </a>
                         <!-- Dropdown - User Information -->
