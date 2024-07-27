@@ -58,7 +58,7 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <td style="text-align: center;"><?= $qtdRegistros2 ?></td>
                                     <td style="text-align: center;"><?= $status ?></td>
                                     <td style="text-align: center;">
-                                        <a title="Adicionar Atividade" class="btn btn-warning btn-sm" onclick="abreModalAtividade(1)">
+                                        <a title="Adicionar Atividade" class="btn btn-warning btn-sm" onclick="abreModalAtividade(<?= $idModulo ?>)">
                                             <i class="fas fa-graduation-cap"></i>
                                         </a>
                                         <a title="Editar Módulo" onclick="editarModulo(<?= $idModulo ?>)" class="btn btn-primary btn-sm">

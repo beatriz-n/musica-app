@@ -1,12 +1,26 @@
 <?php
+require_once '../core/includeCore.php';
 extract($_POST);
-echo $idModulo;
+
+$query = "SELECT * FROM atividade WHERE idAtividade = $idAtividade";
+
+$result = mysqli_query($con, $query);
+$qtdRegistros = mysqli_num_rows($result);
+$array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$idModulo = $array[0]['idModulo'];
+
+$query2 = "SELECT * FROM modulo WHERE idModulo = $idModulo";
+
+$result2 = mysqli_query($con, $query2);
+$tituloModulo = mysqli_fetch_all($result2, MYSQLI_ASSOC)[0]['tituloModulo'];
+
 ?>
 
 <div style="max-width: 75%;" class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Atividades Cadastradas no Módulo - [Título do Módulo Aqui]</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Atividades Cadastradas no Módulo - <?= $tituloModulo ?></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -85,7 +99,7 @@ echo $idModulo;
             <div class="modal-footer">
                 <div style="padding-left: 1%;">
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <button type="button" onclick="abreModalAtividade(1)" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="abreModalAtividade(<?= $idModulo ?>)" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         <?php } else { ?>
