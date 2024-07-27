@@ -8,8 +8,8 @@ $result = mysqli_query($con, $query);
 $qtdRegistros = mysqli_num_rows($result);
 
 if ($qtdRegistros == 0) {
-    $query = "INSERT INTO Pessoa (nomePessoa, emailPessoa, senhaPessoa)
-                  VALUES('$nomePessoa','$emailPessoa','$senhaPessoa')";
+    $query = "INSERT INTO Pessoa (nomePessoa, emailPessoa, senhaPessoa, statusPessoa, adminPessoa)
+                  VALUES('$nomePessoa','$emailPessoa','$senhaPessoa', '1', '0')";
 
     $result = mysqli_query($con, $query);
     $id = mysqli_insert_id($con);

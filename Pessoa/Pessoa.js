@@ -86,7 +86,6 @@ function excluirPessoa(idPessoa) {
                     idPessoa: idPessoa
                 }, success: function (data) {
                     if (data == 1) {
-                        //location.href = "dashboard.php";
                         sair();
                         swal('Sucesso!', 'Conta Excluída!', 'success');
                     } else {

@@ -9,7 +9,7 @@
     <!-- Formulário para Adicionar Novo Usuário -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="processa_usuario.php" method="post" enctype="multipart/form-data">
+            <form id="formUsuarioInserir" action="./Usuario/UsuarioI001.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nomeUsuario">Nome Completo</label>
                     <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" placeholder="Digite o nome completo" required>
@@ -21,18 +21,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="senha">Senha</label>
+                    <label for="senhaUsuario">Senha</label>
                     <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario" placeholder="Digite a senha" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="upload">Foto</label>
-                    <input type="file" class="form-control-file" id="upload" name="upload">
+                    <label for="imagemUsuario">Foto</label>
+                    <input type="file" class="form-control-file" id="imagemUsuario" name="imagemUsuario">
                 </div>
 
                 <div class="form-group">
-                    <label for="dataNascimentoUsuario">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="dataNascimentoUsuario" name="dataNascimento" required>
+                    <label for="nascimentoUsuario">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="nascimentoUsuario" name="nascimentoUsuario" required>
                 </div>
 
                 <div class="form-group">
@@ -44,12 +44,21 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button id="buttonformUsuarioInserir" type="submit" class="btn btn-primary">Salvar</button>
                 <a href="usuario.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
 </div>
-<!-- Fim Pagina Novo Usuário -->
 
+<!-- Script personalizado -->
+<script src="Usuario/Usuario.js"></script>
+
+<script>
+    $(document).ready(function() {
+        ajaxInserirUsuario();
+    });
+</script>
+
+<!-- Fim Pagina Novo Usuário -->
 <?php require_once 'footer.php'; ?>
