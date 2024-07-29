@@ -53,7 +53,7 @@ usort($arrayNivel, function ($a, $b) {
         // quantidade de atividades com resposta pelo usuario
         $cmd4 = "SELECT * FROM pessoaatividade pa
         LEFT JOIN atividade a ON pa.idAtividade = a.idAtividade
-        WHERE idModulo = $idModuloOrdenado AND idPessoa = 1";
+        WHERE idModulo = $idModuloOrdenado AND idPessoa = $idPessoaSession";
         $result4 = mysqli_query($con, $cmd4);
         $qtdRegistro4 = mysqli_num_rows($result4);
         $array4 = mysqli_fetch_all($result4, MYSQLI_ASSOC);
@@ -78,7 +78,7 @@ usort($arrayNivel, function ($a, $b) {
         }
 
     ?>
-        <div class="card w-50 mb-3 <?= $status ?>" onclick="redirecionarFazerAtividade(<?= $idModuloOrdenado?>);">
+        <div class="card w-50 mb-3 <?= $status ?>" onclick="if (this.classList.contains('card-focus-incompleta')) return; redirecionarFazerAtividade(<?= $idModuloOrdenado?>, <?= $completoModulo ?>);">
             <div class="card-body text-center">
                 Nível <?= $nivelModuloOrdenado ?> - <?= $tituloModuloOrdenado ?>
             </div>
@@ -116,6 +116,7 @@ usort($arrayNivel, function ($a, $b) {
 
 <form id="idFormFazerAtividade" action="fazeratividade.php" method="post">
     <input id="idModulo01" name="idModulo" type="hidden">
+    <input id="completoModulo" name="completoModulo" type="hidden">
 </form>
 
 <script src="Atividade/Atividade.js"></script>
