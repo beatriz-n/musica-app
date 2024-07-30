@@ -1,4 +1,3 @@
-<br>
 <?php
 require_once './core/conexaoDB.php';
 require_once 'headeraprendizagem.php';
@@ -11,9 +10,9 @@ $result = mysqli_query($con, $cmd);
 $qtdRegistros = mysqli_num_rows($result);
 $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-if (!empty($array[0]['idAtividade'])) {
+if (!empty($array) && !empty($array[0]['idAtividade'])) {
 ?>
-    <form action="Atividade/AtividadeI001.php" method="POST" id="formFazerAtividade">
+    <form action="Atividade/AtividadeI001.php" method="POST" id="idFormInserirFazerAtividade">
         <div style="padding: 2%;">
             <?php if ($completoModulo != 0) { ?>
                 <div class="alert alert-success" role="alert">
@@ -31,12 +30,23 @@ if (!empty($array[0]['idAtividade'])) {
                     <h4>Responda:</h4>
                     <br>
                     <?php
-                    $arrayAlternativa = [];
                     for ($i = 0; $i < $qtdRegistros; $i++) {
                         $arrayAtividade = $array[$i];
                         $j = $i + 1;
 
                         $jsonString = $arrayAtividade['alternativaAtividade'];
+                        $idAtividade = $arrayAtividade['idAtividade'];
+
+                        $cmdRevisao = "SELECT * FROM pessoaatividade pa
+                                        LEFT JOIN atividade a ON pa.idAtividade = a.idAtividade
+                                        WHERE pa.idPessoa = $idPessoaSession AND a.idAtividade = $idAtividade";
+                        $resultRevisao = mysqli_query($con, $cmdRevisao);
+                        $qtdRegistrosRevisao = mysqli_num_rows($resultRevisao);
+                        $arrayRevisao = mysqli_fetch_all($resultRevisao, MYSQLI_ASSOC);
+
+                        // Verificar se tem dados no array de revisão (tratamento de erro)
+                        $respostaPessoaAtividade = isset($arrayRevisao[0]['respostaPessoaAtividade']) ? $arrayRevisao[0]['respostaPessoaAtividade'] : null;
+                        $resultadoPessoaAtividade = isset($arrayRevisao[0]['resultadoPessoaAtividade']) ? $arrayRevisao[0]['resultadoPessoaAtividade'] : null;
 
                         // verificando o formato do JSON que vem do banco
                         if (strpos($jsonString, "'") !== false) {
@@ -45,26 +55,58 @@ if (!empty($array[0]['idAtividade'])) {
 
                         // Decodificar o JSON
                         $arrayAlternativa = json_decode($jsonString, true);
-
                     ?>
                         <p><b>Atividade <?= $j ?>:</b></p>
                         <p><?= $arrayAtividade['perguntaAtividade'] ?></p>
                         <div class="activity-container">
-                            <?php if (is_array($arrayAlternativa)) {
-                                foreach ($arrayAlternativa as $alternativa) { ?>
-                                    <input type="radio" name="respostaAtividadePessoa<?= $i ?>" value="<?= $i ?>" id="respostaAtividadePessoa<?= $i ?>">
-                                    <label for="respostaAtividadePessoa<?= $i ?>"> <?= $alternativa[0] ?></label>
-                                    <input type="hidden" id="resultadoPessoaAtividade<?= $i ?>" name="resultadoPessoaAtividade<?= $i ?>" value="<?= $alternativa[1] ?>">
-                                    <br>
-                            <?php }
+                            <?php
+                            $h = 0;
+                            foreach ($arrayAlternativa as $alternativa) {
+                                $checked = ($respostaPessoaAtividade == $h) ? 'checked' : '';
+
+                                if ($completoModulo == 1) {
+                                    if (($resultadoPessoaAtividade == 1 && $resultadoPessoaAtividade == $alternativa[1]) || $alternativa[1] == 1) {
+                                        $classe = "alert alert-success";
+                                        $resultado = "Alternativa Correta";
+                                    } else {
+                                        $classe = "alert alert-danger";
+                                        $resultado = "";
+                                    }
+                            ?>
+                                    <div class="alert <?= $classe ?>" role="alert">
+                                        <input type="radio" name="respostaPessoaAtividade<?= $i . $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
+                                        <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
+                                        <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
+                                        <p><?= $resultado ?></p>
+                                    </div>
+                                <?php
+                                } else { ?>
+                                    <input type="radio" name="respostaPessoaAtividade<?= $i . $h ?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
+                                    <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
+                                    <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
+
+                                <?php
+                                } ?>
+                                <br>
+                            <?php
+                                $h++;
                             } ?>
                         </div>
+                        <input type="hidden" id="h" name="h" value="<?= $h ?>">
+                        <input type="hidden" id="i" name="i" value="<?= $i ?>">
+
+                        <input type="hidden" id="idAtividade<?= $i ?>" name="idAtividade<?= $i ?>" value="<?= $idAtividade ?> ">
+                        <input type="hidden" id="idPessoa" name="idPessoa" value="<?= $idPessoaSession ?> ">
                     <?php
                     }
-                    if ($completoModulo == 0) {
+                    if ($completoModulo == 0) { ?>
+                        <br>
+                        <button class="btn btn-primary" id="buttonFormFazerAtividadeInserir" type="submit">Enviar</button>
+                    <?php
+                    } else {
                     ?>
                         <br>
-                        <button class="btn btn-primary" id="btnEnviar" type="submit">Enviar</button>
+                        <a class="btn btn-primary" id="btnRevisar" type="button" href="dashboard.php">Voltar</a>
                     <?php
                     }
                     ?>
@@ -72,7 +114,6 @@ if (!empty($array[0]['idAtividade'])) {
             </div>
         </div>
     </form>
-
 <?php
 } else {
     echo "<div class='alert alert-danger' role='alert'> Volte para a <a href='dashboard.php'><b> Dashboard</b></a> não encontramos nenhuma Atividade cadastrada aqui.</div>";
@@ -82,3 +123,8 @@ if (!empty($array[0]['idAtividade'])) {
 <?php require_once 'footer.php'; ?>
 
 <script src="Atividade/Atividade.js"></script>
+<script>
+    $(document).ready(function() {
+        ajaxInserirFazerAtividade();
+    });
+</script>
