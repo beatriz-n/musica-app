@@ -44,9 +44,9 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 $status = '';
 
                                 if ($array[$i]['statusPessoa'] == 1) {
-                                    $status = "Ativo";
+                                    $status = "<span class=\"badge badge-success\"> Ativo </span>";
                                 } else {
-                                    $status = "Inativo";
+                                    $status = "<span class=\"badge badge-danger\"> Inativo </span>";
                                 }
                             ?>
                                 <tr>
@@ -54,7 +54,7 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <td class="col-6"><?= $array[$i]['nomePessoa'] ?></td>
 
                                     <!-- Status -->
-                                    <td style="text-align: center;"><span class="badge badge-success"> <?= $status ?></span></td>
+                                    <td style="text-align: center;"><?= $status ?></td>
 
                                     <!-- Admin -->
                                     <td style="text-align: center;">
@@ -63,9 +63,8 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                         </div>
                                     </td>
                                     <td style="text-align: center;">
-
                                         <!-- Editar -->
-                                        <a title="Editar Usuário" onclick="redirecionarUsuario($pessoa['idPessoa'])" class="btn btn-primary btn-sm">
+                                        <a title="Editar Usuário" onclick="redirecionarUsuario(<?= $idPessoa ?>)" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
 

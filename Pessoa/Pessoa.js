@@ -1,5 +1,5 @@
 function editarPessoa(idPessoa) {
-    $('#idPessoa03').val(idPessoa);
+    $('#idPessoa01').val(idPessoa);
     $('#idFormEditarPessoa').trigger('submit');
 }
 

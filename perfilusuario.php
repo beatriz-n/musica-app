@@ -42,7 +42,7 @@
  </div>
 
  <form id="idFormEditarPessoa" action="perfilusuarioeditar.php" method="post">
-     <input id="idPessoa03" name="idPessoa" type="hidden">
+     <input id="idPessoa01" name="idPessoa" type="hidden">
  </form>
 
  <!-- Fim Página de Perfil -->
