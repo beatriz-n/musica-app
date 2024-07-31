@@ -1,6 +1,6 @@
 
 // redirecionamentos
-function redirecionarUsuario(idUsuario) {
+function editarUsuario(idUsuario) {
     $('#idUsuario01').val(idUsuario);
     $('#idFormUsuarioEditar').trigger('submit');
 }

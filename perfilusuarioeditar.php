@@ -2,11 +2,13 @@
 extract($_POST);
 require_once 'headeraprendizagem.php';
 
-$query = "SELECT * FROM pessoa WHERE idPessoa = $idPessoa";
+if (isset($idPessoa)) {
+    $query = "SELECT * FROM pessoa WHERE idPessoa = $idPessoa";
 
-$result = mysqli_query($con, $query);
-$array = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$pessoa = $array[0];
+    $result = mysqli_query($con, $query);
+    $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $pessoa = $array[0];
+}
 
 ?>
 
@@ -53,7 +55,7 @@ $pessoa = $array[0];
                         <div class="form-group">
                             <label for="imagem_perfil">Imagem de Perfil</label>
                             <input type="file" class="form-control-file" id="imagem_perfil" name="imagem_perfil">
-                            <img width="400" height="400" src="<?php echo 'Pessoa/img/perfil/' . $pessoa['imagemPessoa']; ?> " class="img-profile rounded-circle mt-3" alt="Imagem de Perfil">
+                            <img width="400" height="400" src="<?php echo './img/perfil/' . $pessoa['imagemPessoa']; ?> " class="img-profile rounded-circle mt-3" alt="Imagem de Perfil">
                         </div>
                     </div>
                 </div>

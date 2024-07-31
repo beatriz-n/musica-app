@@ -1,9 +1,11 @@
 <?php
 if (isset($idPessoaSession)) {
-    $query = "SELECT nomePessoa FROM pessoa WHERE idPessoa = $idPessoaSession";
+    $query = "SELECT nomePessoa, imagemPessoa FROM pessoa WHERE idPessoa = $idPessoaSession";
 
     $result = mysqli_query($con, $query);
-    $nomePessoa = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['nomePessoa'];
+    $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $nomePessoa = $array[0]['nomePessoa'];
+    $imagemPessoa = $array[0]['imagemPessoa'];
 }
 ?>
 
@@ -133,7 +135,7 @@ if (isset($idPessoaSession)) {
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $mensagem = isset($nomePessoa) ? $nomePessoa : "" ?></span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            <img class="img-profile rounded-circle" src="./img/perfil/<?= $imagemPessoa ?>">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -64,7 +64,7 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     </td>
                                     <td style="text-align: center;">
                                         <!-- Editar -->
-                                        <a title="Editar Usuário" onclick="redirecionarUsuario(<?= $idPessoa ?>)" class="btn btn-primary btn-sm">
+                                        <a title="Editar Usuário" onclick="editarUsuario(<?= $idPessoa ?>)" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
@@ -98,5 +98,5 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <script src="Usuario/Usuario.js"></script>
 
 <form action="usuarioeditar.php" method="post" id="idFormUsuarioEditar">
-    <input type="hidden" value="" name="idUsuario" id="idUsuario01" />
+    <input type="hidden" value="" name="idUsuario" id="idUsuario01"/>
 </form>

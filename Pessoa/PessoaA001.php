@@ -21,7 +21,7 @@ if (isset($_FILES['imagem_perfil'])) {
     $imagemNomeNovo = date('Y_m_d_H-i-s') . '.' . $extensao;
 
     // Move o arquivo para o diretório img/perfil/
-    $diretorio = 'img/perfil/';
+    $diretorio = '../img/perfil/';
     $caminhoCompleto = $diretorio . $imagemNomeNovo;
 
     move_uploaded_file($imagem['tmp_name'], $caminhoCompleto);

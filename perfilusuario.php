@@ -27,7 +27,7 @@
          <div class="card-body">
              <div class="row">
                  <div class="col-md-6 d-flex justify-content-end pr-4">
-                     <img width="400" height="400" src="<?php echo 'Pessoa/img/perfil/' . $pessoa['imagemPessoa']; ?>" class="img-profile rounded-circle" alt="Imagem de Perfil">
+                     <img width="400" height="400" src="<?php echo './img/perfil/' . $pessoa['imagemPessoa']; ?>" class="img-profile rounded-circle" alt="Imagem de Perfil">
                  </div>
                  <div class="align-self-center col-md-6 pe-4">
                      <h1><?php echo $pessoa['nomePessoa']; ?></h1>

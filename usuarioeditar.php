@@ -2,7 +2,7 @@
 extract($_POST);
 require_once 'header.php';
 
-$query = "SELECT * FROM pessoa WHERE idPessoa = '$idUsuario'";
+$query = "SELECT * FROM pessoa WHERE idPessoa = $idUsuario";
 
 $result = mysqli_query($con, $query);
 $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -19,6 +19,7 @@ $pessoa = $array[0];
     <div class="card shadow mb-4">
         <div class="card-body">
             <form id="formUsuarioEditar" action="./Usuario/UsuarioA001.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>">
                 <div class="form-group">
                     <label for="nome">Nome Completo</label>
                     <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" placeholder="Digite o nome completo" value="<?= $pessoa['nomePessoa']; ?>" required>
@@ -41,7 +42,8 @@ $pessoa = $array[0];
 
                 <div class="form-group">
                     <label for="imagem">Foto</label>
-                    <input type="file" class="form-control-file" id="imagemUsuario" name="imagemUsuario" value="<?= $pessoa['imagemPessoa']; ?>">
+                    <input type="file" class="form-control-file" id="imagemUsuario" name="imagemUsuario" value="">
+                    <img src="./img/perfil/<?= $pessoa['imagemPessoa']; ?>" alt="<?= $pessoa['imagemPessoa']; ?>" style="width: 100px; margin-top: 20px;">
                 </div>
 
                 <div class="form-group">
@@ -65,9 +67,13 @@ $pessoa = $array[0];
 </div>
 
 <form id="idFormUsuarioEditar" action="usuarioeditar.php" method="post">
-    <input id="idUsuario01" name="idUsuario" type="hidden">
+    <input id="idUsuario03" name="idUsuario" type="hidden">
 </form>
 
+<!-- Fim Página de Editar Usuario -->
+<?php require_once 'footer.php'; ?>
+
+<script src="Usuario/Usuario.js"></script>
 <script>
     document.getElementById('toggleSenha').addEventListener('click', function(e) {
         const senhaInput = document.getElementById('senhaUsuario');
@@ -82,7 +88,8 @@ $pessoa = $array[0];
             icon.classList.add('fa-eye');
         }
     });
-</script>
-<!-- Fim Pagina Novo Usuário -->
 
-<?php require_once 'footer.php'; ?>
+    $(document).ready(function() {
+        ajaxAlterarUsuario();
+    });
+</script>
