@@ -74,14 +74,14 @@ if (!empty($array) && !empty($array[0]['idAtividade'])) {
                                     }
                             ?>
                                     <div class="alert <?= $classe ?>" role="alert">
-                                        <input type="radio" name="respostaPessoaAtividade<?= $i . $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
+                                        <input type="radio" name="respostaPessoaAtividade<?= $i?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
                                         <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                         <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
                                         <p><?= $resultado ?></p>
                                     </div>
                                 <?php
                                 } else { ?>
-                                    <input type="radio" name="respostaPessoaAtividade<?= $i . $h ?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
+                                    <input type="radio" name="respostaPessoaAtividade<?= $i?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
                                     <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                     <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
 
