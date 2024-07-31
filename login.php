@@ -35,23 +35,23 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Bem-vindo!</h1>
                             </div>
-                            <form class="user needs-validation" novalidate>
+                            <form class="user needs-validation" id="formPessoaLogin" method="post" action="./Pessoa/PessoaN002.php" novalidate>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="emailUsuario" name="emailUsuario" placeholder="Email" required>
+                                    <input type="email" class="form-control form-control-user" id="emailPessoa" name="emailPessoa" placeholder="Email" required>
                                     <div class="invalid-feedback">
                                         Por favor, seu endereço de email.
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="senhaUsario" name="senhaUsario" placeholder="Senha" required>
+                                        <input type="password" class="form-control form-control-user" id="senhaPessoa" name="senhaPessoa" placeholder="Senha" required>
                                         <div class="invalid-feedback">
                                             Por favor, insira sua senha.
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Criar
+                                <button id="buttonformPessoaLogin" type="submit" class="btn btn-primary btn-user btn-block">
+                                    Login
                                 </button>
                                 <hr>
                             </form>
@@ -82,15 +82,17 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <!-- JavaScript for validation -->
     <script>
-        (function () {
+        (function() {
             'use strict';
-            window.addEventListener('load', function () {
+            window.addEventListener('load', function() {
                 var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -100,6 +102,15 @@
                 });
             }, false);
         })();
+    </script>
+
+    <script src="js/jquery.form.js"></script>
+    <script src="Pessoa/Pessoa.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            ajaxLoginPessoa();
+        });
     </script>
 
 </body>

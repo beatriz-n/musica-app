@@ -98,6 +98,34 @@ function excluirPessoa(idPessoa) {
 }
 
 
+function ajaxLoginPessoa() {
+    $('#formPessoaLogin').ajaxForm({
+        beforeSend: function () {
+            $('#buttonformPessoaLogin').prop('disabled', true);
+        },
+        success: function (data) {
+            $('#buttonformPessoaLogin').prop('disabled', false);
+            try {
+                switch (data) {
+                    case '1':
+                        location.href = 'dashboard.php';
+                        break;
+                    case '-2':
+                        swal('Erro!', 'Email não encontrado!', 'error');
+                        break;
+                    case '-3':
+                        swal('Erro!', 'A senha está incorreta!', 'error');
+                        break;
+                    default:
+                        swal('Erro!', 'Ocorreu um erro ao efetuar login!', 'error');
+                        break;
+                }
+            } catch (error) {
+                swal('Erro!', 'Erro inesperado!', 'error');
+            }
+        }
+    });
+}
 
 function sair() {
     $.ajax({
