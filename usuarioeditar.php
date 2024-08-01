@@ -30,12 +30,12 @@ $pessoa = $array[0];
                     <input type="email" class="form-control" id="emailUsuario" name="emailUsuario" placeholder="Digite o e-mail" value="<?= $pessoa['emailPessoa']; ?>" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario" placeholder="Digite a senha" value="<?= $pessoa['senhaPessoa']; ?>" required>
-                    <div class="input-group-append mt-2">
+                    <div class="form-group ml-0 mr-0 d-flex">
+                        <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario" placeholder="Digite a senha" value="<?= $pessoa['senhaPessoa']; ?>" required>
                         <span class="input-group-text" id="toggleSenha" style="cursor: pointer;">
-                            Mostrar Senha &nbsp<i class="fas fa-eye"></i>
+                            <i class="fas fa-eye"></i>
                         </span>
                     </div>
                 </div>
@@ -72,6 +72,20 @@ $pessoa = $array[0];
 
 <!-- Fim Página de Editar Usuario -->
 <?php require_once 'footer.php'; ?>
+
+<style>
+    #senhaUsuario {
+        border-right: 0px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+    #toggleSenha {
+        border-left: 0px !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
+</style>
 
 <script src="Usuario/Usuario.js"></script>
 <script>

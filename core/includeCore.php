@@ -22,4 +22,10 @@ if (empty($idPessoaSession)) {
     if ($_SERVER['PHP_SELF'] == 'index.php' || $_SERVER['PHP_SELF'] == '/musica-app/index.php') {
         header('Location: ./dashboard.php');
     }
+
+    $query = "SELECT adminPessoa FROM pessoa WHERE idPessoa = $idPessoaSession";
+
+    $result = mysqli_query($con, $query);
+    $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $adminPessoa = $array[0]['adminPessoa'];
 }

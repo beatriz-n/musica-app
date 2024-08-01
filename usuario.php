@@ -41,6 +41,7 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <?php
                             for ($i = 0; $i < $qtdRegistros; $i++) {
                                 $idPessoa = $array[$i]['idPessoa'];
+                                $adminPessoa = $array[$i]['adminPessoa'];
                                 $status = '';
 
                                 if ($array[$i]['statusPessoa'] == 1) {
@@ -59,7 +60,9 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <!-- Admin -->
                                     <td style="text-align: center;">
                                         <div class="d-flex justify-content-center">
-                                            <input class="form-check-input" style="width: 1.5em; height: 1.5em;" type="checkbox" id="admcheckbox" name="admcheckbox" data-toggle="modal" data-target="#admModal">
+                                            <input onclick="alterarFlagAdm(<?= $idPessoa ?>)" class="form-check-input" style="width: 1.5em; height: 1.5em;" 
+                                            type="checkbox" id="admcheckbox_<?= $idPessoa ?>" name="admcheckbox" 
+                                            <?php if($adminPessoa == 1){ echo 'checked'; }?>>
                                         </div>
                                     </td>
                                     <td style="text-align: center;">
@@ -98,5 +101,5 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <script src="Usuario/Usuario.js"></script>
 
 <form action="usuarioeditar.php" method="post" id="idFormUsuarioEditar">
-    <input type="hidden" value="" name="idUsuario" id="idUsuario01"/>
+    <input type="hidden" value="" name="idUsuario" id="idUsuario01" />
 </form>

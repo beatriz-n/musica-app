@@ -113,3 +113,40 @@ function excluirUsuario(idUsuario) {
         }
     });
 }
+
+function alterarFlagAdm(idPessoa) {
+    var flagAdm = 0;
+    if ($('#admcheckbox_' + idPessoa).prop('checked')) {
+        flagAdm = 1;
+    }
+    swal({
+        title: 'Atenção',
+        text: 'Deseja alterar a permissão de administrador desse usuário?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'green',
+        confirmButtonText: 'Sim!',
+        cancelButtonText: 'Cancelar!',
+        closeOnConfirm: true
+    }, function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                type: 'POST',
+                url: 'Usuario/UsuarioA002.php',
+                async: true,
+                data: {
+                    idPessoa: idPessoa,
+                    flagAdm: flagAdm
+                }, success: function (data) {
+                    if (data == 0) {
+                        swal('Erro!', 'Houve um erro ao tentar alterar o usuário!', 'error');
+                    }else{
+                        location.href = 'usuario.php';
+                    }
+                }
+            });
+        }else{
+            location.href = 'usuario.php';
+        }
+    });
+}

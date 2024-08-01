@@ -1,11 +1,33 @@
-<?php require_once 'header.php'; ?>
+<?php
+require_once 'header.php';
+
+$query = "SELECT count(*) as qtdModulo FROM modulo WHERE statusModulo = 1";
+
+$query2 = "SELECT count(*) as qtdAtividade FROM atividade WHERE statusAtividade = 1";
+
+$query3 = "SELECT count(*) as qtdPessoa FROM pessoa WHERE statusPessoa = 1";
+
+$result = mysqli_query($con, $query);
+$array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$result2 = mysqli_query($con, $query2);
+$array2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+
+$result3 = mysqli_query($con, $query3);
+$array3 = mysqli_fetch_all($result3, MYSQLI_ASSOC);
+
+$qtdModulo = $array[0]['qtdModulo'];
+$qtdAtividade = $array2[0]['qtdAtividade'];
+$qtdPessoa = $array3[0]['qtdPessoa'];
+
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4" style="size: 40px;">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Acesse o Módulo Aprendizagem</a>
+        <a href="dashboard.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Acesse o Módulo Aprendizagem</a>
     </div>
 
     <!-- <div class="row">
@@ -30,11 +52,11 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Quantidades de Módulos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                Quantidades de Módulos Ativos</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $qtdModulo ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-book fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -48,11 +70,11 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Quantidade de Atividades</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                Quantidade de Atividades Ativas</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $qtdAtividade ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -65,16 +87,16 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Quantidade de Usuários
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Quantidade de Usuários Ativos
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">-</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $qtdPessoa ?></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
