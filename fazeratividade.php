@@ -9,10 +9,8 @@ $cmd = "SELECT * FROM modulo m
 $result = mysqli_query($con, $cmd);
 $qtdRegistros = mysqli_num_rows($result);
 $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-
 ?>
-<form action="Atividade/AtividadeI001.php" method="POST" id="idFormInserirFazerAtividade">
+<form action="Atividade/AtividadeI001.php" method="POST" id="idFormInserirFazerAtividade" class="needs-validation" novalidate>
     <div style="padding: 2%;">
         <?php if ($completoModulo == 1) { ?>
             <div class="alert alert-success" role="alert">
@@ -20,11 +18,11 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <p>Agora você está visualizando a <b>revisão</b></p>
             </div>
         <?php }
-        if($completoModulo == 2){?>
-            <h3>  <i class="fas fa-book"></i> <?= $array[0]['tituloModulo'] ?> </h3>
-        <?php }else{?>
+        if ($completoModulo == 2) { ?>
+            <h3><i class="fas fa-book"></i> <?= $array[0]['tituloModulo'] ?> </h3>
+        <?php } else { ?>
             <h3>Nível <?= $array[0]['nivelModulo'] ?> </h3>
-       <?php } ?>
+        <?php } ?>
 
         <hr>
         <div class="card">
@@ -80,17 +78,18 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     }
                             ?>
                                     <div class="alert <?= $classe ?>" role="alert">
-                                        <input type="radio" name="respostaPessoaAtividade<?= $i ?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
+                                        <input type="radio" name="respostaPessoaAtividade<?= $i ?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?> required>
                                         <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                         <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
                                         <p><?= $resultado ?></p>
+                                        <div class="invalid-feedback">Por favor, selecione uma alternativa.</div>
                                     </div>
                                 <?php
                                 } else { ?>
-                                    <input type="radio" name="respostaPessoaAtividade<?= $i ?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
+                                    <input type="radio" name="respostaPessoaAtividade<?= $i ?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>" required>
                                     <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                     <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
-
+                                    <div class="invalid-feedback">Por favor, selecione uma alternativa.</div>
                                 <?php
                                 } ?>
                                 <br>
@@ -118,7 +117,6 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div>
 </form>
 
-
 <?php require_once 'footer.php'; ?>
 
 <script src="Atividade/Atividade.js"></script>
@@ -126,4 +124,21 @@ $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $(document).ready(function() {
         ajaxInserirFazerAtividade();
     });
+
+    // Adicione a validação de formulário personalizada do Bootstrap
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

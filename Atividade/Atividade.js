@@ -5,6 +5,7 @@ function redirecionarFazerAtividade(idModulo, completoModulo) {
     $('#idFormFazerAtividade').trigger('submit');
 }
 function ajaxInserirFazerAtividade() {
+
 $('#idFormInserirFazerAtividade').ajaxForm({
     beforeSend: function () {
         $('#buttonFormFazerAtividadeInserir').prop('disabled', true);

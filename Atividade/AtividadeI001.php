@@ -24,11 +24,12 @@ for ($j = 0; $j <= $i; $j++) {
 
                   $result = mysqli_query($con, $query);
                   $idPessoaAtividade = mysqli_insert_id($con);
-                  if ($idPessoaAtividade > 0) {
+                  if ($idPessoaAtividade > 0 && is_numeric($idPessoaAtividade)) {
                         echo $idPessoaAtividade;
                   } else {
                         echo 0;
                   }
+                  
             }
       }
 }

@@ -64,6 +64,7 @@ usort($arrayNivel, function ($a, $b) {
             if (($qtdRegistro3 == 0) && !empty($array2[0]['descricaoModulo'])) {
                 // tipo somante leitura
                 $completoModulo = 2;
+                $qtdCompletos++;
             }else{
                 $completoModulo = 0;
             }
