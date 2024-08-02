@@ -17,7 +17,7 @@
                      <h1 class="h3 mb-0 text-gray-800">Perfil</h1>
                  </div>
                  <div class="d-flex col-3 justify-content-end">
-                     <a href="dashboard.php" class="btn btn-primary mr-2">Voltar</a>
+                     <a href="admin.php" class="btn btn-primary mr-2">Voltar</a>
                      <a class="btn btn-primary mr-2" onclick="editarPessoa(<?= $pessoa['idPessoa']; ?>)">Editar Perfil</a>
                      <a class="btn btn-danger" onclick="excluirPessoa(<?= $pessoa['idPessoa']; ?>)">Excluir Conta</a>
                  </div>

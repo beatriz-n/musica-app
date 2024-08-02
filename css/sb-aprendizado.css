@@ -128,6 +128,9 @@
 }
 
 /* atividade incompleta */
+.card-focus-incompleta {
+    transform: scale(1.05);
+}
 .card-focus-incompleta:hover .card-body {
     opacity: 0;
     cursor: not-allowed;
@@ -146,6 +149,44 @@
     transition: opacity 0.3s ease;
     opacity: 1;
 }
+
+/* atividades somente leitura */
+.card-focus-leitura {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.card-focus-leitura:hover {
+    background-color: white;
+    color: #ff9e30;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px ff9e30;
+}
+.card-focus-leitura:hover .card-body {
+    opacity: 0;
+}
+.card-focus-leitura:hover::after {
+    content: '\f02d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+    color: #ff9e30;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+.card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
 
 /* Barra de progresso */
 .fixed-bottom {

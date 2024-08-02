@@ -10,23 +10,29 @@ $result = mysqli_query($con, $cmd);
 $qtdRegistros = mysqli_num_rows($result);
 $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-if (!empty($array) && !empty($array[0]['idAtividade'])) {
+
 ?>
-    <form action="Atividade/AtividadeI001.php" method="POST" id="idFormInserirFazerAtividade">
-        <div style="padding: 2%;">
-            <?php if ($completoModulo != 0) { ?>
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Você já completou este Nível!</h4>
-                    <p>Agora você está visualizando a <b>revisão</b></p>
-                </div>
-            <?php } ?>
+<form action="Atividade/AtividadeI001.php" method="POST" id="idFormInserirFazerAtividade">
+    <div style="padding: 2%;">
+        <?php if ($completoModulo == 1) { ?>
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Você já completou este Nível!</h4>
+                <p>Agora você está visualizando a <b>revisão</b></p>
+            </div>
+        <?php }
+        if($completoModulo == 2){?>
+            <h3>  <i class="fas fa-book"></i> <?= $array[0]['tituloModulo'] ?> </h3>
+        <?php }else{?>
             <h3>Nível <?= $array[0]['nivelModulo'] ?> </h3>
-            <hr>
-            <div class="card">
-                <div class="card-body">
-                    <h4><?= $array[0]['tituloModulo'] ?> :</h4>
-                    <h5 class="card-title"><?= $array[0]['descricaoModulo'] ?></h5>
-                    <br>
+       <?php } ?>
+
+        <hr>
+        <div class="card">
+            <div class="card-body">
+                <h4><?= $array[0]['tituloModulo'] ?> :</h4>
+                <h5 class="card-title"><?= $array[0]['descricaoModulo'] ?></h5>
+                <br>
+                <?php if (!empty($array) && !empty($array[0]['idAtividade'])) { ?>
                     <h4>Responda:</h4>
                     <br>
                     <?php
@@ -74,14 +80,14 @@ if (!empty($array) && !empty($array[0]['idAtividade'])) {
                                     }
                             ?>
                                     <div class="alert <?= $classe ?>" role="alert">
-                                        <input type="radio" name="respostaPessoaAtividade<?= $i?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
+                                        <input type="radio" name="respostaPessoaAtividade<?= $i ?>" id="respostaPessoaAtividade<?= $i . $h ?>" <?= $checked ?>>
                                         <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                         <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
                                         <p><?= $resultado ?></p>
                                     </div>
                                 <?php
                                 } else { ?>
-                                    <input type="radio" name="respostaPessoaAtividade<?= $i?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
+                                    <input type="radio" name="respostaPessoaAtividade<?= $i ?>" value="<?= $h ?>" id="respostaPessoaAtividade<?= $i . $h ?>">
                                     <label for="respostaPessoaAtividade<?= $i . $h ?>"> <?= $alternativa[0] ?></label>
                                     <input type="hidden" id="resultadoPessoaAtividade<?= $i . $h ?>" name="resultadoPessoaAtividade<?= $i . $h ?>" value="<?= $alternativa[1]; ?>">
 
@@ -102,23 +108,16 @@ if (!empty($array) && !empty($array[0]['idAtividade'])) {
                     if ($completoModulo == 0) { ?>
                         <br>
                         <button class="btn btn-primary" id="buttonFormFazerAtividadeInserir" type="submit">Enviar</button>
-                    <?php
-                    } else {
-                    ?>
-                        <br>
-                        <a class="btn btn-primary" id="btnRevisar" type="button" href="dashboard.php">Voltar</a>
-                    <?php
+                <?php
                     }
-                    ?>
-                </div>
+                }
+                ?>
+                <a href="dashboard.php"><button class="btn btn-primary" id="buttonVoltar" type="button">Voltar</button></a>
             </div>
         </div>
-    </form>
-<?php
-} else {
-    echo "<div class='alert alert-danger' role='alert'> Volte para a <a href='dashboard.php'><b> Dashboard</b></a> não encontramos nenhuma Atividade cadastrada aqui.</div>";
-}
-?>
+    </div>
+</form>
+
 
 <?php require_once 'footer.php'; ?>
 

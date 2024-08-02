@@ -61,8 +61,16 @@ usort($arrayNivel, function ($a, $b) {
             $completoModulo = 1;
             $qtdCompletos++;
         } else {
-            $completoModulo = 0;
+            if (($qtdRegistro3 == 0) && !empty($array2[0]['descricaoModulo'])) {
+                // tipo somante leitura
+                $completoModulo = 2;
+            }else{
+                $completoModulo = 0;
+            }
         }
+
+
+
         // acha nivel menor
         if (($nivelModuloOrdenado < $nivelMenor) && $completoModulo == 0) {
             $nivelMenor = $nivelModuloOrdenado;
@@ -71,18 +79,21 @@ usort($arrayNivel, function ($a, $b) {
         // idmodulo atual é o id do modulo com o nivel menor e incompleto
         if ($completoModulo == 1) {
             $status = "card-focus-completa";
-        } else if ($nivelModuloOrdenado == $nivelMenor) {
+        }else if ($nivelModuloOrdenado == $nivelMenor) {
             $status = "card-focus-atual";
         } else if ($nivelModuloOrdenado > $nivelMenor) {
             $status = "card-focus-incompleta";
-        }
+        }else if ($completoModulo == 2) {
+            $status = "card-focus-leitura";
+        } 
 
     ?>
-        <div class="card w-50 mb-3 <?= $status ?>" onclick="if (this.classList.contains('card-focus-incompleta')) return; redirecionarFazerAtividade(<?= $idModuloOrdenado?>, <?= $completoModulo ?>);">
-            <div class="card-body text-center">
-                Nível <?= $nivelModuloOrdenado ?> - <?= $tituloModuloOrdenado ?>
-            </div>
-        </div>
+<div class="card w-50 mb-3 <?= $status ?>" onclick="if (this.classList.contains('card-focus-incompleta')) return; redirecionarFazerAtividade(<?= $idModuloOrdenado?>, <?= $completoModulo ?>);">
+    <div class="card-body text-center">
+        Nível <?= $nivelModuloOrdenado ?> - <?= $tituloModuloOrdenado ?><?php if ($completoModulo == 2) { echo " (Apenas Leitura)"; } ?>
+    </div>
+</div>
+
     <?php
     }
     // calculo do progresso do aluno
@@ -113,6 +124,12 @@ usort($arrayNivel, function ($a, $b) {
         }
     });
 </script>
+
+<script>
+        // Define o título dinamicamente usando JavaScript
+        var tituloModulo = "<?= htmlspecialchars($tituloModulo) ?>";
+        document.getElementById('cardFocusLeitura').setAttribute('title', '📒 ' + tituloModulo);
+    </script>
 
 <form id="idFormFazerAtividade" action="fazeratividade.php" method="post">
     <input id="idModulo01" name="idModulo" type="hidden">
