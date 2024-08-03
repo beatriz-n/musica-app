@@ -34,6 +34,29 @@ function adicionarAlternativa() {
     proximaLetra = String.fromCharCode(proximaLetra.charCodeAt(0) + 1); // Incrementa a letra
     proximoValor ++;
 }
+
+function adicionarAlternativaEditar() {
+    var letra = $('#letraAlternativa').val();
+    var valor = $('#valorAlternativa').val();
+
+    var novaAlternativa = '<div class="form-group">' +
+        '<label for="alternativa' + letra + '">Alternativa ' + letra + '</label>' +
+        '<input type="text" class="form-control" name="alternativa[]" required>' +
+        '<div class="form-check">' +
+        '<input class="form-check-input" type="checkbox" name="alternativaCorreta" id="alternativaCorreta' + letra + '" value="' + valor + '">' +
+        '<label class="form-check-label" for="alternativaCorreta' + letra + '">' +
+        'Correta' +
+        '</label>' +
+        '</div>' +
+        '</div>';
+
+    $('#alternativas').append(novaAlternativa);
+    letra = String.fromCharCode(letra.charCodeAt(0) + 1); // Incrementa a letra
+    valor ++;
+    $('#letraAlternativa').val(letra);
+    $('#valorAlternativa').val(valor);
+}
+
 // atividade
 function abreModalAtividade(idModulo) {
     $.ajax({
@@ -120,7 +143,7 @@ function ajaxInserirAtividade() {
                 if (data != '0') {
                     swal({
                         title: 'Bom trabalho!',
-                        text: 'Módulo inserido com sucesso.',
+                        text: 'Atividade inserida com sucesso.',
                         type: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#DD6B55',
@@ -131,7 +154,38 @@ function ajaxInserirAtividade() {
                         $('#fecharModal').trigger('click');
                     });
                 } else {
-                    swal('Erro!', 'Houve um erro ao tentar inserir o Módulo!', 'error');
+                    swal('Erro!', 'Houve um erro ao tentar inserir a atividade!', 'error');
+                }
+            } catch (error) {
+                swal('Erro!', 'Erro inesperado!', 'error');
+            }
+        }
+    });
+}
+
+function ajaxAlterarAtividade() {    
+    $('#formAtividadeAlterar').ajaxForm({
+        beforeSend: function () {
+            $('#buttonFormAtividadeAlterar').prop('disabled', true);
+        },
+        success: function (data) {
+            $('#buttonFormAtividadeAlterar').prop('disabled', false);
+            try {
+                if (data != '0') {
+                    swal({
+                        title: 'Bom trabalho!',
+                        text: 'Atividade alterado com sucesso.',
+                        type: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Ok!',
+                        closeOnConfirm: true
+                    }, function (isConfirm) {
+                        abreModalAtividade(data);
+                        $('#fecharModal').trigger('click');
+                    });
+                } else {
+                    swal('Erro!', 'Houve um erro ao tentar alterar a atividade!', 'error');
                 }
             } catch (error) {
                 swal('Erro!', 'Erro inesperado!', 'error');
