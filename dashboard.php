@@ -45,7 +45,7 @@ usort($arrayNivel, function ($a, $b) {
 
         // quantidade de atividades em cada modulo no total
         $cmd3 = "SELECT * FROM atividade
-        WHERE idModulo = $idModuloOrdenado";
+        WHERE idModulo = $idModuloOrdenado AND statusAtividade = 1";
         $result3 = mysqli_query($con, $cmd3);
         $qtdRegistro3 = mysqli_num_rows($result3);
         $array3 = mysqli_fetch_all($result3, MYSQLI_ASSOC);
@@ -58,20 +58,23 @@ usort($arrayNivel, function ($a, $b) {
         $qtdRegistro4 = mysqli_num_rows($result4);
         $array4 = mysqli_fetch_all($result4, MYSQLI_ASSOC);
         if (($qtdRegistro4 == $qtdRegistro3) && ($qtdRegistro4 != 0)) {
-            $completoModulo = 1;
             $qtdCompletos++;
+            $completoModulo = 1;
         } else {
-            if (($qtdRegistro3 == 0) && !empty($array2[0]['descricaoModulo'])) {
-                // tipo somante leitura
+            if ($j == 0 && $qtdRegistro3 == 0) {
                 $completoModulo = 2;
-                $qtdCompletos++;
-            }else{
+            }else if($qtdRegistro3 > 0){
                 $completoModulo = 0;
             }
+            if ($qtdRegistro3 == 0 && !empty($array2[0]['descricaoModulo'])) {
+                if ($completoModulo == 1 || $completoModulo == 2) {
+                    $qtdCompletos++;
+                    $completoModulo = 2;
+                } else {
+                    $completoModulo = 0;
+                }
+            }
         }
-
-
-
         // acha nivel menor
         if (($nivelModuloOrdenado < $nivelMenor) && $completoModulo == 0) {
             $nivelMenor = $nivelModuloOrdenado;
@@ -86,7 +89,7 @@ usort($arrayNivel, function ($a, $b) {
             $status = "card-focus-incompleta";
         }else if ($completoModulo == 2) {
             $status = "card-focus-leitura";
-        } 
+        }
 
     ?>
 <div class="card w-50 mb-3 <?= $status ?>" onclick="if (this.classList.contains('card-focus-incompleta')) return; redirecionarFazerAtividade(<?= $idModuloOrdenado?>, <?= $completoModulo ?>);">
