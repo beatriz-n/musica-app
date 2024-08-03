@@ -40,8 +40,8 @@ CREATE TABLE `atividade` (
 --
 
 INSERT INTO `atividade` (`idAtividade`, `perguntaAtividade`, `alternativaAtividade`, `statusAtividade`, `idModulo`) VALUES
-(1, 'Qual o terceiro grau da escala maior de dó?', '[[\'D\',\'0\'],[\'F#\',\'0\'],[\'E\',\'1\']]', 1, 4),
-(2, 'Qual o quinto grau da escala maior de dó?', '[[\'B\',\'0\'],[\'G\',\'1\'],[\'A#\',\'0\']]', 1, 4);
+(1, 'Qual o terceiro grau da escala maior de dó?', '[[\"D\",0],[\"F#\",0],[\"E\",1]]', 1, 4),
+(2, 'Qual o quinto grau da escala maior de dó?', '[[\"B\",0],[\"G\",1],[\"A#\",0]]', 1, 4);
 
 -- --------------------------------------------------------
 

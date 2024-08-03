@@ -12,6 +12,12 @@ if (empty($idPessoaSession)) {
         $_SESSION['idPessoaSession'] = $_COOKIE['idPessoaCookie'];
 
         $idPessoaSession = $_SESSION['idPessoaSession'];
+
+        $query = "SELECT adminPessoa FROM pessoa WHERE idPessoa = $idPessoaSession";
+
+        $result = mysqli_query($con, $query);
+        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $adminPessoa = $array[0]['adminPessoa'];
     } else {
         if ($_SERVER['PHP_SELF'] != 'index.php' && $_SERVER['PHP_SELF'] != '/musica-app/index.php') {
             echo $_COOKIE['idPessoaCookie'];
