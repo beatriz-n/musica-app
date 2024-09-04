@@ -1,65 +1,57 @@
-# [Start Bootstrap - SB Admin 2](https://startbootstrap.com/theme/sb-admin-2/)
+# Projeto de Aprendizagem Modular
 
-[SB Admin 2](https://startbootstrap.com/theme/sb-admin-2/) is an open source admin dashboard theme for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-For the legacy Bootstrap 3 version of this theme, you can view the [last stable release](https://github.com/StartBootstrap/startbootstrap-sb-admin-2/releases/tag/v3.3.7%2B1) of SB Admin 2 for Bootstrap 3.
+## Sobre o Projeto
 
-## Preview
+O Projeto de Aprendizagem Modular é uma plataforma desenvolvida para facilitar o ensino e a aprendizagem de qualquer coisa. O sistema é modular e oferece um conjunto de ferramentas tanto para administradores quanto para os usuários que buscam aprender.
 
-[![SB Admin 2 Preview](https://assets.startbootstrap.com/img/screenshots/themes/sb-admin-2.png)](https://startbootstrap.github.io/startbootstrap-sb-admin-2/)
+O diferencial da flexibilidade de aprendizagem se dá pela adaptabilidade que o sistema fornece: basta cadastrar o assunto desejado e pronto.
 
-**[Launch Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin-2/)**
+Atualmente, o sistema foi usado em um projeto da faculdade onde utilizamos música para exemplificar seu uso.
 
-## Status
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-sb-admin-2/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin-2.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin-2)
-[![Build Status](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin-2.svg?branch=master)](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin-2)
-[![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2)
-[![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2?type=dev)
+## Membros do Projeto
 
-## Download and Installation
+- **[Beatriz Nespoli](https://github.com/beatriz-n)**
+- **[Bruno Henrique Savazzi](https://github.com/brunohsaz)**
+- **[João Vitor Burnunssi](https://github.com/Burnunssi)**
+- **[Gabriel Uyemura](https://github.com/GabrielUyemura)**
 
-To begin using this template, choose one of the following options to get started:
+## Funcionalidades
 
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/theme/sb-admin-2/)
-* Install via npm: `npm i startbootstrap-sb-admin-2`
-* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin-2.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-sb-admin-2)
+### Módulo de Administrador
 
-## Usage
+- **Gerenciamento de Usuários:** Permite inserir, excluir, atualizar e listar usuários na plataforma.
+- **Gerenciamento de Níveis e Atividades:** Funções para inserir, excluir, atualizar e listar atividades e níveis de aprendizagem.
+- **Controle de Acesso:** Usuários com tipo de acesso "admin" têm privilégios para gerenciar atividades e níveis.
+- **Contabilização de Progresso:** Monitora e registra o progresso dos usuários ao longo do processo de aprendizagem.
 
-After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
+### Módulo de Aprendizagem
 
-### Gulp Tasks
+- **Interatividade e Usabilidade:** Foco na experiência do usuário, oferecendo ferramentas interativas que facilitam a aprendizagem.
 
-* `gulp` the default task that builds everything
-* `gulp watch` browserSync opens the project in your default browser and live reloads when changes are made
-* `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
-* `gulp js` minifies the themes JS file
-* `gulp vendor` copies dependencies from node_modules to the vendor directory
+## Tecnologias Utilizadas
 
-You must have npm installed globally in order to use this build environment. This theme was built using node v11.6.0 and the Gulp CLI v2.0.1. If Gulp is not running properly after running `npm install`, you may need to update node and/or the Gulp CLI locally.
+- **PHP Vanilla:** Usado para a lógica de programação e backend do sistema.
+- **AJAX:** Utilizado para criar interações dinâmicas sem a necessidade de recarregar a página.
+- **jQuery:** Biblioteca JavaScript que simplifica a manipulação de elementos HTML e eventos.
+- **Bootstrap:** Framework CSS para criar layouts responsivos e visualmente agradáveis.
+- **MVC:** Padrão de arquitetura utilizado para organizar o código e facilitando a manutenção e escalabilidade do sistema.
 
-## Bugs and Issues
+## Instalação
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-sb-admin-2/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/theme/sb-admin-2/).
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu_usuario/projeto-aprendizagem-musical.git
+    ```
+2. Ligue seu servidor Apache.
 
-## About
+3. Acesse-o localmente através do navegador, utilizando o endereço:
+    ```bash
+    http://localhost/musica-app
+    ```
 
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
+## Licença
 
-* <https://startbootstrap.com>
-* <https://twitter.com/SBootstrap>
-
-Start Bootstrap was created by and is maintained by **[David Miller](https://davidmiller.io/)**.
-
-* <https://davidmiller.io>
-* <https://twitter.com/davidmillerhere>
-* <https://github.com/davidtmiller>
-
-Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
-
-## Copyright and License
-
-Copyright 2013-2021 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE) license.
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
